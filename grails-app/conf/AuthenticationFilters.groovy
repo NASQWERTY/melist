@@ -4,10 +4,12 @@ import javax.naming.AuthenticationException
  * Created by darktemplar on 11/04/15.
  */
 class AuthenticationFilters {
+//    def meliObject
+
     def filters = {
         loginCheck(controller: '*', action: '*') {
             before = {
-                if (!session.auth_token) {
+                if (!meliObject || !meliObject.getAccessToken()) {
                     redirect(controller: "auth", action:"authenticate")
                     return false
                 }
@@ -16,7 +18,8 @@ class AuthenticationFilters {
             afterView = { AuthenticationException e ->
 
                 if (e) {
-                    log.debug "Reauthenticating user", e
+                    redirect(controller: "auth", action:"authenticate")
+                    return false
                 }
             }
         }
