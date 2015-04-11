@@ -1,8 +1,18 @@
-package com.meList
+package com.melist
 
-class WishList {
-    
+public class WishList {
+    Date startDate
+    Date endDate
+    User user
+    List<Item> items
+    WishListType wishListType
+
 
     static constraints = {
+    }
+
+
+    enum WishListType {
+        MARRIAGE, CHARITY, BIRTHDAY
     }
 }
