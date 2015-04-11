@@ -9,6 +9,11 @@ public class WishList {
     static hasMany = [items: Item]
 
     static constraints = {
+        startDate blank: false, nullable: false
+        endDate blank: false, nullable: false
+        user blank: false, nullable: false
+        wishListType blank: false, nullable: false
+        items blank: true
     }
 
 
