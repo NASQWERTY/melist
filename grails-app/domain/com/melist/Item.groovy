@@ -13,6 +13,6 @@ class Item {
         name blank: false, nullable: false
         pictureURL blank: false, nullable: false
         price blank: false, nullable: false
-        hasMany blank: true
+        contribution blank: true
     }
 }
