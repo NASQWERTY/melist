@@ -4,9 +4,9 @@ public class WishList {
     Date startDate
     Date endDate
     User user
-    List<Item> items
     WishListType wishListType
 
+    static hasMany = [items: Item]
 
     static constraints = {
     }
