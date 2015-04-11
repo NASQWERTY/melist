@@ -9,5 +9,10 @@ class Item {
     static hasMany = [contribution: Contribution]
 
     static constraints = {
+        meliId blank: false, nullable: false
+        name blank: false, nullable: false
+        pictureURL blank: false, nullable: false
+        price blank: false, nullable: false
+        hasMany blank: true
     }
 }
