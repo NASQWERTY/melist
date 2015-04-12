@@ -56,22 +56,24 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${wishListInstance?.items}">
-				<li class="fieldcontain">
-					<span id="items-label" class="property-label"><g:message code="wishList.items.label" default="Items" /></span>
-					
-						<g:each in="${wishListInstance.items}" var="i">
-						<span class="property-value" aria-labelledby="items-label"><g:link controller="item" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+
+				<div role="complementary" class="ch-box panelItems">
+					<g:if test="${wishListInstance?.items}">
+						<ul>
+							<g:each in="${wishListInstance?.items}" status="index" var="item">
+								<li>
+									<g:img uri="${item.thumbnail}" ></g:img>
+									${item.title}
+								</li>
+							</g:each>
+						</ul>
+					</g:if>
+				</div>
 			
 			</ol>
 			<g:form url="[resource:wishListInstance, action:'delete']" method="DELETE">
                 <g:link class="ch-btn" action="edit" resource="${wishListInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                <g:actionSubmit class="ch-btn" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                <g:actionSubmit class="ch-btn" action="delete" value="${message(code: 'default.button.FinishList.label', default: 'TerminarLista')}" onclick="return confirm('${message(code: 'default.button.terminarlista.confirm.message', default: 'Estas seguro que deseas terminar la Lista?')}');" />
 			</g:form>
 		</div>
 	</body>
