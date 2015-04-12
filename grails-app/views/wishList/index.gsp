@@ -25,7 +25,7 @@
         <g:formRemote name="myForm" on404="alert('not found!')" update="updateMe"
                       url="[controller: 'wishList', action:'search']">
             <input name="id" type="text" />
-            <Button type="submit">Buscar</Button>
+            <button type="submit" class="ch-btn-skin ch-btn-small">Buscar</button>
         </g:formRemote>
         <div id="updateMe"><g:render template="item_template"/></div>
 
@@ -41,7 +41,7 @@
                     <h1>${item.title}</h1>
                     <input type="hidden" name="itemId" value=${item.meliId}>
                     <input type="hidden" name="items" value=${items}>
-                    <Button type="submit" onclick="clearBox('bm${item.meliId}')">Seleccionar</Button>
+                    <button type="submit" onclick="clearBox('bm${item.meliId}')" class="ch-btn">Seleccionar</button>
                 </g:formRemote>
                 </li>
             </g:each>
@@ -52,7 +52,7 @@
 
 
     <div id="list-wishList" class="content scaffold-list" role="main" >
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Lista de Deseos</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

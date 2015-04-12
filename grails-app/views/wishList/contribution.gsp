@@ -49,9 +49,8 @@
 			</li>
 		</g:if>
 
-		<div role="complementary" class="ch-box panelItems">
-			<h2>Items:</h2>
-			<br/>
+        <h2>Items:</h2>
+        <div role="complementary" class="ch-box panelItems">
 			<g:if test="${wishListInstance?.items}">
 				<ul>
 					<g:each in="${wishListInstance?.items}" status="index" var="item">

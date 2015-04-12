@@ -11,7 +11,6 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="show-wishList" class="content scaffold-show" role="main">
@@ -82,7 +81,7 @@
                 </li>
 			
 			</ol>
-            <g:message code="wishlist.share" default="Share"/><g:link controller="wishList" action="contribution" id="${wishListInstance.id}">Link</g:link>
+            <g:message code="wishlist.share" default="Share"/> <g:link style="font-size: 18px;" controller="wishList" action="contribution" id="${wishListInstance.id}"> <strong>link!</strong></g:link>
 			<g:form url="[resource:wishListInstance, action:'delete']" method="DELETE">
                 <g:link class="ch-btn" action="edit" resource="${wishListInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                 <g:actionSubmit class="ch-btn" action="delete" value="${message(code: 'default.button.FinishList.label', default: 'TerminarLista')}" onclick="return confirm('${message(code: 'default.button.terminarlista.confirm.message', default: 'Estas seguro que deseas terminar la Lista?')}');" />

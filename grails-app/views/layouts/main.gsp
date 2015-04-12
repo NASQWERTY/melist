@@ -25,7 +25,7 @@
         </nav>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
-        Hackathon 2015 - Mercadolibre
+        Hackathon 2015 - Mercadolibre - Grupo 4 - Pan de Azucar
         </div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 	</body>
