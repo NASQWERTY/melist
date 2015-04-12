@@ -1,6 +1,8 @@
 package com.melist
 
-
+import com.ning.http.client.FluentStringsMap
+import com.ning.http.client.Response
+import grails.converters.JSON
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -13,12 +15,28 @@ class WishListController {
     def meliObject
 
     def index(Integer max) {
-        def items = []
-        //meliObject.getAccessToken()
-        //meliObject.get()
-
         params.max = Math.min(max ?: 10, 100)
         respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
+        
+        def url = "/sites/MLA/search?";
+        FluentStringsMap params = new FluentStringsMap();
+        params.add("access_token", meliObject.getAccessToken());
+        params.add("q", "ipod");
+        params.add("attributes", "results");
+        Response response = meliObject.get(url,params)
+        String responseStr = response.getResponseBody()
+        def result = JSON.parse(responseStr)
+        def results = result.getAt("results")
+        def items = []
+
+        results.each { aux ->
+            def item = new Item()
+            item.meliId = aux.id
+            item.price = aux.price
+            item.thumbnail = aux.thumbnail
+            item.title = aux.title
+            items << item
+        }
     }
 
     def show(WishList wishListInstance) {
