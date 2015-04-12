@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-wishList" class="content scaffold-list" role="main">
@@ -24,25 +24,21 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'wishList.name.label', default: 'Name')}" />
-					
 						<g:sortableColumn property="startDate" title="${message(code: 'wishList.startDate.label', default: 'Start Date')}" />
-					
+
 						<g:sortableColumn property="endDate" title="${message(code: 'wishList.endDate.label', default: 'End Date')}" />
-					
+
 						<th><g:message code="wishList.user.label" default="User" /></th>
-					
+
 						<g:sortableColumn property="wishListType" title="${message(code: 'wishList.wishListType.label', default: 'Wish List Type')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "name")}</g:link></td>
-					
-						<td><g:formatDate date="${wishListInstance.startDate}" /></td>
+
+						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "startDate")}</g:link></td>
 					
 						<td><g:formatDate date="${wishListInstance.endDate}" /></td>
 					

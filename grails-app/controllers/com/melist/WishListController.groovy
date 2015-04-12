@@ -10,9 +10,15 @@ class WishListController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def meliObject
+
     def index(Integer max) {
+        def items = []
+        //meliObject.getAccessToken()
+        //meliObject.get()
+
         params.max = Math.min(max ?: 10, 100)
-        respond WishList.list(params), model:[wishListInstanceCount: WishList.count()]
+        respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
     }
 
     def show(WishList wishListInstance) {
