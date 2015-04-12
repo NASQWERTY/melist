@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
         mavenRepo "https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots"
+        mavenRepo "https://github.com/mercadopago/sdk-java/raw/master/releases"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -62,6 +63,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         compile "com.mercadolibre:sdk:0.0.2-SNAPSHOT"
+        compile "com.mercadopago:sdk:0.3.4"
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
     }
 
