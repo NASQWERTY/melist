@@ -34,12 +34,13 @@ class BootStrap {
         //
         JSON.registerObjectMarshaller( Item ) { Item item ->
         return [
-                meliId: item.meliId,
+                id: item.meliId,
                 title : item.title,
                 price: item.price,
                 thumbnail : item.thumbnail
-        ]
-    }
+            ]
+
+        }
 
 
     }

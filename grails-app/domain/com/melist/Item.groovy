@@ -3,7 +3,7 @@ package com.melist
 class Item {
     String meliId
     String title
-    URL thumbnail
+    String thumbnail
     BigDecimal price
 
     static hasMany = [contribution: Contribution]

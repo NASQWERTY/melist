@@ -1,4 +1,3 @@
-
 <%@ page import="com.melist.WishList" %>
 <!DOCTYPE html>
 <html>
@@ -20,8 +19,13 @@
         <g:textField name="searchItem" value="" placeholder="Buscar Item"/>
         <a href="" class="ch-btn ch-btn-small ch-btn-skin ch-icon-search"></a>
         <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
+            <g:each in="${items}" status="index" var="item">
+                <li>
+                    <g:img uri="${item.thumbnail}" ></g:img>
+                    ${item.title}
+                    <g:checkBox name="check-item-${item.id}" />
+                </li>
+            </g:each>
         </ul>
     </div>
 

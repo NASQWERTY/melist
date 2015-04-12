@@ -16,7 +16,32 @@ class WishListController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
+
+        def items = []
+
+        //Bookmarks
+        FluentStringsMap paramsBookmarks = new FluentStringsMap()
+        paramsBookmarks.add("access_token", meliObject.getAccessToken())
+        Response bookmarksResponse = meliObject.get("/users/me/bookmarks",paramsBookmarks)
+        String bookmarksResponseStr = bookmarksResponse.getResponseBody()
+        def o = JSON.parse(bookmarksResponseStr)
+
+        //Items
+        o.each {bookmark ->
+            def itemId =  bookmark.item_id
+            Response itemsResponse = meliObject.get("/items/"+itemId)
+            String itemsResponseStr = itemsResponse.getResponseBody()
+            def item = new Item()
+            def itemObject = JSON.parse(itemsResponseStr)
+            item.meliId = itemObject.id
+            item.title = itemObject.title
+            item.price = itemObject.price
+            item.thumbnail = itemObject.thumbnail
+            items << item
+        }
+
+        //params.max = Math.min(max ?: 10, 100)
+
         
         def url = "/sites/MLA/search?";
         FluentStringsMap params = new FluentStringsMap();
@@ -27,7 +52,6 @@ class WishListController {
         String responseStr = response.getResponseBody()
         def result = JSON.parse(responseStr)
         def results = result.getAt("results")
-        def items = []
 
         results.each { aux ->
             def item = new Item()
@@ -37,6 +61,8 @@ class WishListController {
             item.title = aux.title
             items << item
         }
+
+        respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
     }
 
     def show(WishList wishListInstance) {
