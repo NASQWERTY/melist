@@ -18,14 +18,16 @@ class AuthenticationFilters {
                     session['originalURI'] = request.forwardURI.replace("/melist", "")
                     String redirectURL = meliObject.getAuthUrl("http://localhost:8080/melist");
                     redirect(url: redirectURL)
-                    return false
+                    return true
                 }
                 if (session['originalURI']){
                     //once we have been redirected from Meli, redirect to the original page
                     redirect(uri: session['originalURI'])
                     session['originalURI'] = ""
-                    return true
+                }else if (session['originalURI'] == "/") {
+                    render (view: '/index')
                 }
+                return true
             }
         }
 
