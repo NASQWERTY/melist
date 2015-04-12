@@ -8,7 +8,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="name" required="" value="${wishListInstance?.name}"/>
-
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'startDate', 'error')} required">
