@@ -63,7 +63,7 @@
 							<g:each in="${wishListInstance?.items}" status="index" var="item">
 								<li>
 									<g:img uri="${item.thumbnail}" ></g:img>
-									<a href="http://articulo.mercadolibre.com.ar/${item.meliId}">${item.title}</a>
+									<a href="${item.link}">${item.title}</a>
 								</li>
 							</g:each>
 						</ul>
