@@ -24,6 +24,8 @@
 			<thead>
 					<tr>
 					
+						<g:sortableColumn property="name" title="${message(code: 'wishList.name.label', default: 'Name')}" />
+					
 						<g:sortableColumn property="startDate" title="${message(code: 'wishList.startDate.label', default: 'Start Date')}" />
 					
 						<g:sortableColumn property="endDate" title="${message(code: 'wishList.endDate.label', default: 'End Date')}" />
@@ -38,7 +40,9 @@
 				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "startDate")}</g:link></td>
+						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "name")}</g:link></td>
+					
+						<td><g:formatDate date="${wishListInstance.startDate}" /></td>
 					
 						<td><g:formatDate date="${wishListInstance.endDate}" /></td>
 					

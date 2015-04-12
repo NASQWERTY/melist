@@ -1,6 +1,7 @@
 package com.melist
 
 public class WishList {
+    String name
     Date startDate
     Date endDate
     User user
@@ -9,6 +10,7 @@ public class WishList {
     static hasMany = [items: Item]
 
     static constraints = {
+        name blank: false, nullable: false
         startDate blank: false, nullable: false
         endDate blank: false, nullable: false
         user blank: false, nullable: false

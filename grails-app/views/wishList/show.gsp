@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list wishList">
 			
+				<g:if test="${wishListInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="wishList.name.label" default="Name" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${wishListInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${wishListInstance?.startDate}">
 				<li class="fieldcontain">
 					<span id="startDate-label" class="property-label"><g:message code="wishList.startDate.label" default="Start Date" /></span>

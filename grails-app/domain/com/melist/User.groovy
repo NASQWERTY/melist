@@ -3,6 +3,7 @@ package com.melist
 public class User {
 
     long meliId
+    String refreshToken
 
     static hasMany = [lists: WishList]
 

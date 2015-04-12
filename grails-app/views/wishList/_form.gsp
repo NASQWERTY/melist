@@ -2,6 +2,15 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'name', 'error')} required">
+	<label for="name">
+		<g:message code="wishList.name.label" default="Name" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="name" required="" value="${wishListInstance?.name}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'startDate', 'error')} required">
 	<label for="startDate">
 		<g:message code="wishList.startDate.label" default="Start Date" />
