@@ -39,30 +39,9 @@ class WishListController {
             item.title = itemObject.title
             item.price = itemObject.price
             item.thumbnail = itemObject.thumbnail
+            item.link = itemObject.permalink
             items << item
         }
-
-        //params.max = Math.min(max ?: 10, 100)
-
-        
-       /* def url = "/sites/MLA/search?";
-        FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", meliObject.getAccessToken());
-        params.add("q", "ipod");
-        params.add("attributes", "results");
-        Response response = meliObject.get(url,params)
-        String responseStr = response.getResponseBody()
-        def result = JSON.parse(responseStr)
-        def results = result.getAt("results")
-
-        results.each { aux ->
-            def item = new Item()
-            item.meliId = aux.id
-            item.price = aux.price
-            item.thumbnail = aux.thumbnail
-            item.title = aux.title
-            items << item
-        }*/
 
         session['items'] = items
         respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
@@ -81,6 +60,30 @@ class WishListController {
         selectedItems << selectedItem
         session['selectedItems'] = selectedItems
         [selectedItems: selectedItems]
+    }
+
+    def search(){
+        def items = []
+        def url = "/sites/MLA/search?";
+        FluentStringsMap paramsReq = new FluentStringsMap();
+        paramsReq.add("access_token", meliObject.getAccessToken());
+        paramsReq.add("q", params.id);
+        paramsReq.add("attributes", "results");
+        Response response = meliObject.get(url,paramsReq)
+        String responseStr = response.getResponseBody()
+        def result = JSON.parse(responseStr)
+        def results = result.getAt("results")
+        results.each { aux ->
+            def item = new Item()
+            item.meliId = aux.id
+            item.price = aux.price
+            item.thumbnail = aux.thumbnail
+            item.title = aux.title
+            item.link = aux.permalink
+            items << item
+        }
+        render(template:"item_template", model:[itemsS: items])
+
     }
 
     def show(WishList wishListInstance) {

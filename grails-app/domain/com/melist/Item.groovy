@@ -5,6 +5,7 @@ class Item {
     String title
     String thumbnail
     BigDecimal price
+    String link
 
     static constraints = {
         meliId blank: false, nullable: false
