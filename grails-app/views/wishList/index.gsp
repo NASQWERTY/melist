@@ -17,6 +17,12 @@
     <div role="complementary" class="ch-box panelItems">
         <h2>Items</h2>
         <g:textField name="searchItem" value="" placeholder="Buscar Item"/>
+        <g:formRemote name="myForm" on404="alert('not found!')" update="updateMe"
+                      url="[controller: 'wishList', action:'search']">
+            Book Id: <input name="id" type="text" />
+            <Button type="submit">Buscar</Button>
+        </g:formRemote>
+        <div id="updateMe"><g:render template="item_template"/></div>
         <a href="" class="ch-btn ch-btn-small ch-btn-skin ch-icon-search"></a>
         <ul>
             <g:each in="${items}" status="index" var="item">
@@ -53,7 +59,7 @@
 				</thead>
 				<tbody>
                     <div id="itemsAdded" class="ch-box panelItems">
-                        <g:render template="addItems"/>
+
                     </div>
 				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
