@@ -18,15 +18,18 @@ class BootStrap {
         Item item4 = new Item(meliId: "MLA552603966",
                               title:"Espumador de leche",
                               thumbnail:new URL("http://mla-s1-p.mlstatic.com/espumador-de-leche-fria-y-caliente-philips-saeco-hd701918-22060-MLA20222196451_012015-O.jpg"),
-                              price:new BigDecimal(500.00f))
+                              price:new BigDecimal(500.00f),
+                              link: "link")
         Item item5 = new Item(meliId: "MLA550061607",
                               title:"Leche en polvo entera x 25kg",
                               thumbnail:new URL("http://mla-s2-p.mlstatic.com/leche-en-polvo-entera-x-25kg-fabrica-de-helados-20689-MLA20195790221_112014-F.jpg"),
-                              price:new BigDecimal(950.00f))
+                              price:new BigDecimal(950.00f),
+                              link: "link")
         Item item6 = new Item(meliId: "MLA550114136",
                               title:"Tv Samsung Slim Led 55",
                               thumbnail: new URL("http://mla-s2-p.mlstatic.com/tv-samsung-slim-led-55-un-55-f8000-full-hd-smart-tv-3d-9820-MLA20022256368_122013-O.jpg"),
-                              price: new BigDecimal(24299.91f))
+                              price: new BigDecimal(24299.91f),
+                              link: "link")
         item4.save(flush: true)
         item5.save(flush: true)
         item6.save(flush: true)

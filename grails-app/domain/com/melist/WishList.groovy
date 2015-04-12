@@ -20,7 +20,7 @@ public class WishList {
 
 
     enum WishListType {
-        CASAMIENTO, DONACION, CUMPLEANOS, VAQUITA
+        CASAMIENTO, DONACION, CUMPLEANOS, VAQUITA, BABYSHOWER
     }
 
     public def getTotalAmount() {

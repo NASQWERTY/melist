@@ -49,18 +49,9 @@
 			</li>
 		</g:if>
 
-		<g:if test="${wishListInstance?.items}">
-			<li class="fieldcontain">
-				<span id="items-label" class="property-label"><g:message code="wishList.items.label" default="Items" /></span>
-
-				<g:each in="${wishListInstance.items}" var="i">
-					<span class="property-value" aria-labelledby="items-label"><g:link controller="item" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
-				</g:each>
-
-			</li>
-		</g:if>
-
 		<div role="complementary" class="ch-box panelItems">
+			<h2>Items:</h2>
+			<br/>
 			<g:if test="${wishListInstance?.items}">
 				<ul>
 					<g:each in="${wishListInstance?.items}" status="index" var="item">
@@ -79,8 +70,6 @@
 				<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getAmountArchived()}</span>
 
 			</li>
-		</g:if>
-
 
 	</ol>
 
