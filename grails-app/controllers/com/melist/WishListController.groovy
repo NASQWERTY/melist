@@ -14,7 +14,7 @@ class WishListController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def meliObject
+    def meliHolder
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -23,15 +23,15 @@ class WishListController {
 
         //Bookmarks
         FluentStringsMap paramsBookmarks = new FluentStringsMap()
-        paramsBookmarks.add("access_token", meliObject.getAccessToken())
-        Response bookmarksResponse = meliObject.get("/users/me/bookmarks",paramsBookmarks)
+        paramsBookmarks.add("access_token", meliHolder.meli.getAccessToken())
+        Response bookmarksResponse = meliHolder.meli.get("/users/me/bookmarks",paramsBookmarks)
         String bookmarksResponseStr = bookmarksResponse.getResponseBody()
         def o = JSON.parse(bookmarksResponseStr)
 
         //Items
         o.each {bookmark ->
             def itemId =  bookmark.item_id
-            Response itemsResponse = meliObject.get("/items/"+itemId as String)
+            Response itemsResponse = meliHolder.meli.get("/items/"+itemId as String)
             String itemsResponseStr = itemsResponse.getResponseBody()
             def item = new Item()
             def itemObject = JSON.parse(itemsResponseStr)
@@ -67,10 +67,10 @@ class WishListController {
         def items = []
         def url = "/sites/MLA/search?";
         FluentStringsMap paramsReq = new FluentStringsMap();
-        paramsReq.add("access_token", meliObject.getAccessToken());
+        paramsReq.add("access_token", meliHolder.meli.getAccessToken());
         paramsReq.add("q", params.id);
         paramsReq.add("attributes", "results");
-        Response response = meliObject.get(url,paramsReq)
+        Response response = meliHolder.meli.get(url,paramsReq)
         String responseStr = response.getResponseBody()
         def result = JSON.parse(responseStr)
         def results = result.getAt("results")

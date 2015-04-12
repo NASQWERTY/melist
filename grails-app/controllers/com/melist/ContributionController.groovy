@@ -9,8 +9,6 @@ class ContributionController {
 
     static allowedMethods = [save: "POST"]
 
-    def meliObject
-
     @Transactional
     def save(Contribution contribution){
         //The access Token should actually be the one on the wishlist

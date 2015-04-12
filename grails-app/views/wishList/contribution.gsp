@@ -77,11 +77,15 @@
     <g:form url="[resource:contribution, action:'save']">
         <fieldset class="form">
             <g:hiddenField name="wishList" value="${wishListInstance.id}"/>
+            <label for="amount">
+                <g:message code="contribution.amount" />
+                <span class="required-indicator">*</span>
+            </label>
             <g:textField name="amount" required="true" value=""/>
         </fieldset>
         <fieldset>
             <!-- The user may not be the owner user -->
-            <g:submitButton name="create" class="ch-btn" value="${message(code: 'contribute', default: 'Contribuir')}" />
+            <g:submitButton name="create" class="ch-btn" value="${message(code: 'contribution.contribute', default: 'Contribuir')}" />
         </fieldset>
     </g:form>
 </div>
