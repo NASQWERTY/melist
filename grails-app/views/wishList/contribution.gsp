@@ -64,12 +64,21 @@
 			</g:if>
 		</div>
 
+		<g:if test="${wishListInstance?.items}">
+			<li class="fieldcontain">
+				<span id="wishListType-label" class="property-label"><g:message code="wishList.TotalAmount.label" default="Monto a Alcanzar" /></span>
+
+				<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getTotalAmount()}</span>
+
+			</li>
+
 			<li class="fieldcontain">
 				<span id="wishListType-label" class="property-label"><g:message code="wishList.AmountArchived.label" default="Monto Logrado" /></span>
 
 				<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getAmountArchived()}</span>
 
 			</li>
+		</g:if>
 
 	</ol>
 

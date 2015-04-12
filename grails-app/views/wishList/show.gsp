@@ -67,12 +67,19 @@
 					</g:if>
 				</div>
 
-				<li class="fieldcontain">
-					<span id="wishListType-label" class="property-label"><g:message code="wishList.AmountArchived.label" default="Monto Logrado" /></span>
+                <li class="fieldcontain">
+                    <span id="wishListType-label" class="property-label"><g:message code="wishList.TotalAmount.label" default="Monto a Alcanzar" /></span>
 
-					<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getAmountArchived()}</span>
+                    <span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getTotalAmount()}</span>
 
-				</li>
+                </li>
+
+                <li class="fieldcontain">
+                    <span id="wishListType-label" class="property-label"><g:message code="wishList.AmountArchived.label" default="Monto Logrado" /></span>
+
+                    <span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getAmountArchived()}</span>
+
+                </li>
 			
 			</ol>
             <g:message code="wishlist.share" default="Share"/><g:link controller="wishList" action="contribution" id="${wishListInstance.id}">Link</g:link>

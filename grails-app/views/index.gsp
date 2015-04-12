@@ -62,7 +62,7 @@
 								<br/>Bienvenido a MELIST
 								<br/>
 								<br/>
-								<br/>El sitio donde podras las mas variadas wishLists, incluyendo de cumpleaños, donacion, casamientos, y más!!
+								<br/>El sitio donde podras crear tus listas de casamiento, cumpleaños y mas! Empezá a planear YA!
 							</div>
 							</div>
 					</g:link>
