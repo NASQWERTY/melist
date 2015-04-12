@@ -2,16 +2,16 @@ package com.melist
 
 class Item {
     String meliId
-    String name
-    URL pictureURL
+    String title
+    URL thumbnail
     BigDecimal price
 
     static hasMany = [contribution: Contribution]
 
     static constraints = {
         meliId blank: false, nullable: false
-        name blank: false, nullable: false
-        pictureURL blank: false, nullable: false
+        title blank: false, nullable: false
+        thumbnail blank: false, nullable: false
         price blank: false, nullable: false
         contribution blank: true
     }
