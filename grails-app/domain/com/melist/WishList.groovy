@@ -6,8 +6,7 @@ public class WishList {
     Date endDate
     User user
     WishListType wishListType
-
-    static hasMany = [items: Item]
+    static hasMany = [items: Item, contributions: Contribution]
 
     static constraints = {
         name blank: false, nullable: false
@@ -16,6 +15,7 @@ public class WishList {
         user blank: false, nullable: false
         wishListType blank: false, nullable: false
         items blank: true
+        contribution blank: true
     }
 
 
@@ -34,12 +34,12 @@ public class WishList {
     }
 
     public def getAmountArchived() {
-        //Method mocked.
-
-        def duration = endDate - startDate
-        def mockedContribution = duration * 2500
-
-        BigDecimal totalAmount = new BigDecimal(mockedContribution)
+        BigDecimal totalAmount = new BigDecimal(0f)
+        if(contributions && !contributions.isEmpty()){
+            for ( contribution in contributions ) {
+                  totalAmount = totalAmount.add(contribution.amount)
+            }
+        }
         return totalAmount
     }
 
