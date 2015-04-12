@@ -31,7 +31,7 @@ class WishListController {
         //Items
         o.each {bookmark ->
             def itemId =  bookmark.item_id
-            Response itemsResponse = meliObject.get("/items/"+itemId)
+            Response itemsResponse = meliObject.get("/items/"+itemId as String)
             String itemsResponseStr = itemsResponse.getResponseBody()
             def item = new Item()
             def itemObject = JSON.parse(itemsResponseStr)
@@ -45,7 +45,7 @@ class WishListController {
         //params.max = Math.min(max ?: 10, 100)
 
         
-        def url = "/sites/MLA/search?";
+       /* def url = "/sites/MLA/search?";
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meliObject.getAccessToken());
         params.add("q", "ipod");
@@ -62,9 +62,25 @@ class WishListController {
             item.thumbnail = aux.thumbnail
             item.title = aux.title
             items << item
-        }
+        }*/
 
+        session['items'] = items
         respond WishList.list(params), model:[wishListInstanceCount: WishList.count(), items: items]
+    }
+
+    def addItems() {
+        def selectedItems = []
+        if (session['selectedItems']) {
+            selectedItems = session['selectedItems']
+        }
+        def items = session['items']
+        def itemId = params.itemId
+        def selectedItem = items.find {
+            it.meliId == itemId
+        }
+        selectedItems << selectedItem
+        session['selectedItems'] = selectedItems
+        [selectedItems: selectedItems]
     }
 
     def show(WishList wishListInstance) {

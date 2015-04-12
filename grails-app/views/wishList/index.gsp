@@ -21,13 +21,18 @@
         <ul>
             <g:each in="${items}" status="index" var="item">
                 <li>
-                    <g:img uri="${item.thumbnail}" ></g:img>
-                    ${item.title}
-                    <g:checkBox name="check-item-${item.id}" />
+                    <g:remoteLink controller="wishList" action="addItems" params="[itemId: item.meliId, items: items]" update="[success:'itemsAdded',failure:'error']">
+                        <g:img uri="${item.thumbnail}" ></g:img>
+                        ${item.title}
+                        %{--<g:checkBox name="check-item-${item.id}" />--}%
+                    </g:remoteLink>
                 </li>
             </g:each>
         </ul>
     </div>
+
+
+
 
     <div id="list-wishList" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -47,6 +52,9 @@
 					</tr>
 				</thead>
 				<tbody>
+                    <div id="itemsAdded" class="ch-box panelItems">
+                        <g:render template="addItems"/>
+                    </div>
 				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
