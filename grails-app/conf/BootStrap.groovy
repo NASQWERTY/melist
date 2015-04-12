@@ -5,9 +5,10 @@ class BootStrap {
 
     def init = { servletContext ->
         // Adding test users.
-        User user1 = new User (meliId : "1")
-        User user2 = new User (meliId : "2")
-        User user3 = new User (meliId : "3")
+        User user1 = new User (meliId : "1", token:"token1", refreshToken: "refreshToken1")
+        User user2 = new User (meliId : "2", token:"token2", refreshToken: "refreshToken2")
+        User user3 = new User (meliId : "3", token:"token3", refreshToken: "refreshToken3")
+
         user1.save(flush: true)
         user2.save(flush: true)
         user3.save(flush: true)
