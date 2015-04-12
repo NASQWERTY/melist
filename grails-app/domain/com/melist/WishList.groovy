@@ -22,4 +22,25 @@ public class WishList {
     enum WishListType {
         CASAMIENTO, DONACION, CUMPLEANOS
     }
+
+    public def getTotalAmount() {
+        BigDecimal totalAmount = new BigDecimal(0f)
+        if(items && !items.isEmpty()){
+            for ( item in items ) {
+                totalAmount = totalAmount.add(item.getPrice())
+            }
+        }
+        return totalAmount
+    }
+
+    public def getAmountArchived() {
+        //Method mocked.
+
+        def duration = endDate - startDate
+        def mockedContribution = duration * 2500
+
+        BigDecimal totalAmount = new BigDecimal(mockedContribution)
+        return totalAmount
+    }
+
 }
