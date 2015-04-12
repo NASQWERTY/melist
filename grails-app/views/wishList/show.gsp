@@ -75,6 +75,7 @@
 				</li>
 			
 			</ol>
+            <g:message code="wishlist.share" default="Share"/><g:link controller="wishList" action="contribution" id="${wishListInstance.id}">Link</g:link>
 			<g:form url="[resource:wishListInstance, action:'delete']" method="DELETE">
                 <g:link class="ch-btn" action="edit" resource="${wishListInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                 <g:actionSubmit class="ch-btn" action="delete" value="${message(code: 'default.button.FinishList.label', default: 'TerminarLista')}" onclick="return confirm('${message(code: 'default.button.terminarlista.confirm.message', default: 'Estas seguro que deseas terminar la Lista?')}');" />
