@@ -78,7 +78,18 @@
 
 
 	</ol>
-	<a href="contribuir" > contribuir</a>
+
+    <g:set var="contribution" value="${new com.melist.Contribution()}"/>
+    <g:form url="[resource:contribution, action:'save']">
+        <fieldset class="form">
+            <g:hiddenField name="wishList" value="${wishListInstance.id}"/>
+            <g:textField name="amount" required="true" value=""/>
+        </fieldset>
+        <fieldset>
+            <!-- The user may not be the owner user -->
+            <g:submitButton name="create" class="ch-btn" value="${message(code: 'contribute', default: 'Contribuir')}" />
+        </fieldset>
+    </g:form>
 </div>
 </body>
 </html>

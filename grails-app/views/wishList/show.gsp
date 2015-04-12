@@ -1,4 +1,3 @@
-
 <%@ page import="com.melist.WishList" %>
 <!DOCTYPE html>
 <html>
