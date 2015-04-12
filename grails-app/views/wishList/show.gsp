@@ -69,6 +69,14 @@
 						</ul>
 					</g:if>
 				</div>
+
+				<li class="fieldcontain">
+					<span id="wishListType-label" class="property-label"><g:message code="wishList.AmountArchived.label" default="Monto Logrado" /></span>
+
+					<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getAmountArchived()}</span>
+
+				</li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:wishListInstance, action:'delete']" method="DELETE">

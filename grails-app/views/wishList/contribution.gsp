@@ -60,13 +60,18 @@
 			</li>
 		</g:if>
 
-		<g:if test="${wishListInstance?.items}">
-			<li class="fieldcontain">
-				<span id="wishListType-label" class="property-label"><g:message code="wishList.TotalAmount.label" default="Monto a Alcanzar" /></span>
-
-				<span class="property-value" aria-labelledby="wishListType-label">${wishListInstance.getTotalAmount()}</span>
-
-			</li>
+		<div role="complementary" class="ch-box panelItems">
+			<g:if test="${wishListInstance?.items}">
+				<ul>
+					<g:each in="${wishListInstance?.items}" status="index" var="item">
+						<li>
+							<g:img uri="${item.thumbnail}" ></g:img>
+							<a href="${item.link}">${item.title}</a>
+						</li>
+					</g:each>
+				</ul>
+			</g:if>
+		</div>
 
 			<li class="fieldcontain">
 				<span id="wishListType-label" class="property-label"><g:message code="wishList.AmountArchived.label" default="Monto Logrado" /></span>
