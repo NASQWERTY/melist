@@ -1,4 +1,5 @@
 import com.melist.User
+import com.mercadolibre.sdk.Meli
 import com.ning.http.client.FluentStringsMap
 import com.ning.http.client.Response
 import grails.converters.JSON
@@ -9,7 +10,7 @@ import javax.naming.AuthenticationException
  * Created by darktemplar on 11/04/15.
  */
 class AuthenticationFilters {
-    def meliObject
+    def meliHolder
 
     def filters = {
         callbackFromMeli(url: "/"){
@@ -17,11 +18,11 @@ class AuthenticationFilters {
                 if (params.code && !session['meliCode']) {
                     //Callback from Meli with code
                     session['meliCode'] = params.code
-                    meliObject.authorize(params.code as String, "http://localhost:8080/melist")
-                }else if (!meliObject.getAccessToken() && !session['meliCode']){
+                    meliHolder.meli.authorize(params.code as String, "http://localhost:8080/melist")
+                }else if (!meliHolder.meli.getAccessToken() && !session['meliCode']){
                     //Authenticate if not logged
                     session['originalURI'] = request.forwardURI.replace("/melist", "")
-                    String redirectURL = meliObject.getAuthUrl("http://localhost:8080/melist");
+                    String redirectURL = meliHolder.meli.getAuthUrl("http://localhost:8080/melist");
                     redirect(url: redirectURL)
                     return true
                 }
@@ -37,11 +38,11 @@ class AuthenticationFilters {
 
             afterView = { AuthenticationException e ->
 
-                if (meliObject.getAccessToken()) {
+                if (meliHolder.meli.getAccessToken()) {
                     //Check if the user exist, if it doesn't then create it
                     FluentStringsMap meliParams = new FluentStringsMap();
-                    meliParams.add("access_token", meliObject.getAccessToken());
-                    Response response = meliObject.get("/users/me", meliParams);
+                    meliParams.add("access_token", meliHolder.meli.getAccessToken());
+                    Response response = meliHolder.meli.get("/users/me", meliParams);
                     String responseStr = response.getResponseBody()
                     def meliId = JSON.parse(responseStr).id
                     def meliNickname = JSON.parse(responseStr).nickname
@@ -49,8 +50,8 @@ class AuthenticationFilters {
                     User myUser = User.findByMeliId(meliId)
                     if (!myUser){
                         myUser = new User(meliId: meliId,
-                                refreshToken: meliObject.getRefreshToken(),
-                                accessToken: meliObject.getAccessToken(),
+                                refreshToken: meliHolder.meli.getRefreshToken(),
+                                accessToken: meliHolder.meli.getAccessToken(),
                                 nickname: meliNickname)
                         myUser.save flush: true
                     }
@@ -59,11 +60,11 @@ class AuthenticationFilters {
             }
         }
 
-        loginCheck(controller: 'wishList', action: '*') {
+        loginCheck(controller: 'wishList', action: 'create') {
             before = {
-                if (!meliObject.getAccessToken() && !session['meliCode']){
+                if (!meliHolder.meli.getAccessToken() && !session['meliCode']){
                     session['originalURI'] = request.forwardURI.replace("/melist", "")
-                    String redirectURL = meliObject.getAuthUrl("http://localhost:8080/melist");
+                    String redirectURL = meliHolder.meli.getAuthUrl("http://localhost:8080/melist");
                     redirect(url: redirectURL)
                     return false
                 }
@@ -74,8 +75,16 @@ class AuthenticationFilters {
                 if (e) {
                     session['meliCode'] = ""
                     session['originalURI'] = request.forwardURI.replace("/melist", "")
-                    String redirectURL = meliObject.getAuthUrl("http://localhost:8080/melist");
+                    String redirectURL = meliHolder.meli.getAuthUrl("http://localhost:8080/melist");
                     redirect(url: redirectURL)
+                }
+            }
+        }
+
+        clearMeliObjectBeforePayment(controller: 'wishList', action: 'contribution'){
+            before = {
+                if (meliHolder.meli) {
+                    meliHolder.refreshMeli()
                 }
             }
         }
