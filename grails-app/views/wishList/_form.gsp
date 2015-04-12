@@ -39,12 +39,3 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'items', 'error')} ">
-	<label for="items">
-		<g:message code="wishList.items.label" default="Items" />
-		
-	</label>
-	<g:select name="items" from="${com.melist.Item.list()}" multiple="multiple" optionKey="id" size="5" value="${wishListInstance?.items*.id}" class="many-to-many"/>
-
-</div>
-

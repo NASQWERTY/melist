@@ -20,6 +20,7 @@ class WishListController {
         params.max = Math.min(max ?: 10, 100)
 
         def items = []
+        session['selectedItems'] = ""
 
         //Bookmarks
         FluentStringsMap paramsBookmarks = new FluentStringsMap()
@@ -57,8 +58,11 @@ class WishListController {
         def selectedItem = items.find {
             it.meliId == itemId
         }
-        selectedItems << selectedItem
-        session['selectedItems'] = selectedItems
+        if (selectedItem) {
+            selectedItems << selectedItem
+            session['selectedItems'] = selectedItems
+        }
+
         //[selectedItems: selectedItems]
         render(template:"add_items", model:[selectedItems: selectedItems])
     }
@@ -106,10 +110,19 @@ class WishListController {
             return
         }
 
-        if (wishListInstance.hasErrors()) {
-            respond wishListInstance.errors, view:'create'
-            return
-        }
+        FluentStringsMap paramsBookmarks = new FluentStringsMap()
+        paramsBookmarks.add("access_token", meliObject.getAccessToken())
+        Response bookmarksResponse = meliObject.get("/users/me",paramsBookmarks)
+        String bookmarksResponseStr = bookmarksResponse.getResponseBody()
+        def o = JSON.parse(bookmarksResponseStr)
+        User user = new User()
+        user.meliId = o.id
+        user.accessToken = meliObject.getAccessToken()
+        user.nickname = o.nickname
+        user.save flush:true
+        wishListInstance.user = user
+
+        wishListInstance.items = session['selectedItems']
 
         wishListInstance.save flush:true
 

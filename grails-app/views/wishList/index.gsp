@@ -16,13 +16,12 @@
 	<body>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li
 			</ul>
 		</div>
 
     <div role="complementary" class="ch-box panelItems">
-        <h2>Buscar Producto</h2>
+        <h2>Buscar Productos</h2>
         <g:formRemote name="myForm" on404="alert('not found!')" update="updateMe"
                       url="[controller: 'wishList', action:'search']">
             <input name="id" type="text" />
@@ -52,43 +51,25 @@
 
 
 
-    <div id="list-wishList" class="content scaffold-list" role="main">
+    <div id="list-wishList" class="content scaffold-list" role="main" >
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-			<thead>
-					<tr>
-					
-						<g:sortableColumn property="startDate" title="${message(code: 'wishList.startDate.label', default: 'Start Date')}" />
+        <div id="itemsAdded" style="float: left; width: 60%" >
+            <g:render template="add_items"/>
+        </div>
+        <div style="float: right">
+            <g:form url="[action:'save']">
+                <fieldset class="form">
+                    <g:render template="form"/>
+                </fieldset>
+                <fieldset>
+                    <g:submitButton name="create" class="ch-btn" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                </fieldset>
+            </g:form>
+        </div>
 
-						<g:sortableColumn property="endDate" title="${message(code: 'wishList.endDate.label', default: 'End Date')}" />
-					
-						<g:sortableColumn property="wishListType" title="${message(code: 'wishList.wishListType.label', default: 'Wish List Type')}" />
-
-					</tr>
-				</thead>
-				<tbody>
-                    <div id="itemsAdded" >
-                        <g:render template="add_items"/>
-                    </div>
-				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "startDate")}</g:link></td>
-					
-						<td><g:formatDate date="${wishListInstance.endDate}" /></td>
-					
-						<td>${fieldValue(bean: wishListInstance, field: "wishListType")}</td>
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<g:paginate total="${wishListInstanceCount ?: 0}" />
-			</div>
 		</div>
 	</body>
 </html>
