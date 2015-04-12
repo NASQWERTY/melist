@@ -47,13 +47,27 @@
 	<body>
 		<div id="page-body" role="main">
 			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
+				<h1>
+					<g:link controller="wishList">
+						<div style="margin-left: auto;
+						margin-right: auto;
+						width: 100%;" >
+
+							<div style="float: left; width: 50%;"><img src="images/wishlist.png" /></div>
+							<div style="float: right; width: 50%; font-size: 25px; font-weight: 500; position: relative;
+							top: 10%; -webkit-transform: translateY(-10%); -ms-transform: translateY(-10%); transform: translateY(-10%);">
+								<br/>
+
+								<br/>
+								<br/>Bienvenido a MELIST
+								<br/>
+								<br/>
+								<br/>El sitio donde podras las mas variadas wishLists, incluyendo de cumpleaños, donacion, casamientos, y más!!
+							</div>
+							</div>
+					</g:link>
+				</h1>
 			</div>
-		</div>
-	</body>
-</html>
+			</div>
+		</body>
+	</html>
