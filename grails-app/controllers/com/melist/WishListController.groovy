@@ -59,7 +59,8 @@ class WishListController {
         }
         selectedItems << selectedItem
         session['selectedItems'] = selectedItems
-        [selectedItems: selectedItems]
+        //[selectedItems: selectedItems]
+        render(template:"add_items", model:[selectedItems: selectedItems])
     }
 
     def search(){

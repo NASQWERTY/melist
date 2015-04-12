@@ -15,23 +15,27 @@
 		</div>
 
     <div role="complementary" class="ch-box panelItems">
-        <h2>Items</h2>
-        <g:textField name="searchItem" value="" placeholder="Buscar Item"/>
+        <h2>Buscar Producto</h2>
         <g:formRemote name="myForm" on404="alert('not found!')" update="updateMe"
                       url="[controller: 'wishList', action:'search']">
-            Book Id: <input name="id" type="text" />
+            <input name="id" type="text" />
             <Button type="submit">Buscar</Button>
         </g:formRemote>
         <div id="updateMe"><g:render template="item_template"/></div>
-        <a href="" class="ch-btn ch-btn-small ch-btn-skin ch-icon-search"></a>
+
+
+        <h2>Favoritos</h2>
         <ul>
             <g:each in="${items}" status="index" var="item">
                 <li>
-                    <g:remoteLink controller="wishList" action="addItems" params="[itemId: item.meliId, items: items]" update="[success:'itemsAdded',failure:'error']">
-                        <g:img uri="${item.thumbnail}" ></g:img>
-                        ${item.title}
-                        %{--<g:checkBox name="check-item-${item.id}" />--}%
-                    </g:remoteLink>
+                <g:formRemote name="myForm" on404="alert('not found!')" update="itemsAdded"
+                              url="[controller: 'wishList', action:'addItems']">
+                    <g:img uri="${item.thumbnail}" ></g:img>
+                    ${item.title}
+                    <input type="hidden" name="itemId" value=${item.meliId}>
+                    <input type="hidden" name="items" value=${items}>
+                    <Button type="submit">Seleccionar</Button>
+                </g:formRemote>
                 </li>
             </g:each>
         </ul>
@@ -58,8 +62,8 @@
 					</tr>
 				</thead>
 				<tbody>
-                    <div id="itemsAdded" class="ch-box panelItems">
-
+                    <div id="itemsAdded" >
+                        <g:render template="add_items"/>
                     </div>
 				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
