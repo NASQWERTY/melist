@@ -153,4 +153,8 @@ class WishListController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def contribution(WishList wishListInstance) {
+        respond wishListInstance
+    }
 }

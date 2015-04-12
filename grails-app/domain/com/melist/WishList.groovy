@@ -20,6 +20,6 @@ public class WishList {
 
 
     enum WishListType {
-        MARRIAGE, CHARITY, BIRTHDAY
+        CASAMIENTO, DONACION, CUMPLEAÑOS
     }
 }
