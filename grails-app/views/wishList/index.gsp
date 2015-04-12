@@ -1,6 +1,13 @@
 <%@ page import="com.melist.WishList" %>
 <!DOCTYPE html>
 <html>
+<script>
+    function clearBox(elementID)
+    {
+        document.getElementById(elementID).innerHTML = "";
+    }
+    $("#cart_item").html("");
+</script>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'wishList.label', default: 'WishList')}" />
@@ -27,14 +34,15 @@
         <h2>Favoritos</h2>
         <ul>
             <g:each in="${items}" status="index" var="item">
-                <li>
+                <li id="bm${item.meliId}">
                 <g:formRemote name="myForm" on404="alert('not found!')" update="itemsAdded"
                               url="[controller: 'wishList', action:'addItems']">
                     <g:img uri="${item.thumbnail}" ></g:img>
-                    ${item.title}
+                    <h1>$${item.price}</h1>
+                    <h1>${item.title}</h1>
                     <input type="hidden" name="itemId" value=${item.meliId}>
                     <input type="hidden" name="items" value=${items}>
-                    <Button type="submit">Seleccionar</Button>
+                    <Button type="submit" onclick="clearBox('bm${item.meliId}')">Seleccionar</Button>
                 </g:formRemote>
                 </li>
             </g:each>

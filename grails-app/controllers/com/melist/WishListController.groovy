@@ -69,6 +69,7 @@ class WishListController {
         FluentStringsMap paramsReq = new FluentStringsMap();
         paramsReq.add("access_token", meliObject.getAccessToken());
         paramsReq.add("q", params.id);
+        paramsReq.add("limit", "10");
         paramsReq.add("attributes", "results");
         Response response = meliObject.get(url,paramsReq)
         String responseStr = response.getResponseBody()
@@ -83,6 +84,7 @@ class WishListController {
             item.link = aux.permalink
             items << item
         }
+        session['items'] = items
         render(template:"item_template", model:[itemsS: items])
 
     }
