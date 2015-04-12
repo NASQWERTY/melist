@@ -15,7 +15,7 @@ public class WishList {
         user blank: false, nullable: false
         wishListType blank: false, nullable: false
         items blank: true
-        contribution blank: true
+        contributions blank: true
     }
 
 
