@@ -49,15 +49,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${wishListInstance?.user}">
-				<li class="fieldcontain">
-					<span id="user-label" class="property-label"><g:message code="wishList.user.label" default="User" /></span>
-					
-						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${wishListInstance?.user?.id}">${wishListInstance?.user?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${wishListInstance?.wishListType}">
 				<li class="fieldcontain">
 					<span id="wishListType-label" class="property-label"><g:message code="wishList.wishListType.label" default="Wish List Type" /></span>

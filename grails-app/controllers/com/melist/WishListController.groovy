@@ -70,7 +70,9 @@ class WishListController {
     }
 
     def create() {
-        respond new WishList(params)
+        def wishList = new WishList(params)
+        wishList.user = session['loggedUser']
+        respond wishList
     }
 
     @Transactional

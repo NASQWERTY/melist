@@ -1,4 +1,5 @@
 import com.mercadolibre.sdk.Meli
+import org.springframework.beans.factory.config.BeanDefinition
 
 // Place your Spring DSL code here
 beans = {

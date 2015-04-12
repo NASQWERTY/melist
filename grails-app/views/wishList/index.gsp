@@ -41,9 +41,7 @@
 						<g:sortableColumn property="startDate" title="${message(code: 'wishList.startDate.label', default: 'Start Date')}" />
 
 						<g:sortableColumn property="endDate" title="${message(code: 'wishList.endDate.label', default: 'End Date')}" />
-
-						<th><g:message code="wishList.user.label" default="User" /></th>
-
+					
 						<g:sortableColumn property="wishListType" title="${message(code: 'wishList.wishListType.label', default: 'Wish List Type')}" />
 
 					</tr>
@@ -55,8 +53,6 @@
 						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "startDate")}</g:link></td>
 					
 						<td><g:formatDate date="${wishListInstance.endDate}" /></td>
-					
-						<td>${fieldValue(bean: wishListInstance, field: "user")}</td>
 					
 						<td>${fieldValue(bean: wishListInstance, field: "wishListType")}</td>
 					

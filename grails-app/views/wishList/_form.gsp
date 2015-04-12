@@ -28,14 +28,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'user', 'error')} required">
-	<label for="user">
-		<g:message code="wishList.user.label" default="User" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="user" name="user.id" from="${com.melist.User.list()}" optionKey="id" required="" value="${wishListInstance?.user?.id}" class="many-to-one"/>
-
-</div>
+<g:hiddenField id="user" name="user.id" optionKey="id" required="" value="${wishListInstance?.user?.id}"/>
 
 <div class="fieldcontain ${hasErrors(bean: wishListInstance, field: 'wishListType', 'error')} required">
 	<label for="wishListType">
