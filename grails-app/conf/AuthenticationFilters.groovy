@@ -1,3 +1,8 @@
+import com.melist.User
+import com.ning.http.client.FluentStringsMap
+import com.ning.http.client.Response
+import grails.converters.JSON
+
 import javax.naming.AuthenticationException
 
 /**
@@ -28,6 +33,29 @@ class AuthenticationFilters {
                     render (view: '/index')
                 }
                 return true
+            }
+
+            afterView = { AuthenticationException e ->
+
+                if (meliObject.getAccessToken()) {
+                    //Check if the user exist, if it doesn't then create it
+                    FluentStringsMap meliParams = new FluentStringsMap();
+                    meliParams.add("access_token", meliObject.getAccessToken());
+                    Response response = meliObject.get("/users/me", meliParams);
+                    String responseStr = response.getResponseBody()
+                    def meliId = JSON.parse(responseStr).id
+                    def meliNickname = JSON.parse(responseStr).nickname
+
+                    User myUser = User.findByMeliId(meliId)
+                    if (!myUser){
+                        myUser = new User(meliId: meliId,
+                                refreshToken: meliObject.getRefreshToken(),
+                                accessToken: meliObject.getAccessToken(),
+                                nickname: meliNickname)
+                        myUser.save flush: true
+                    }
+                    session['loggedUser'] = myUser
+                }
             }
         }
 

@@ -6,8 +6,7 @@ public class WishList {
     Date endDate
     User user
     WishListType wishListType
-
-    static hasMany = [items: Item]
+    static hasMany = [items: Item, contributions: Contribution]
 
     static constraints = {
         name blank: false, nullable: false
@@ -16,10 +15,32 @@ public class WishList {
         user blank: false, nullable: false
         wishListType blank: false, nullable: false
         items blank: true
+        contributions blank: true
     }
 
 
     enum WishListType {
-        MARRIAGE, CHARITY, BIRTHDAY
+        CASAMIENTO, DONACION, CUMPLEANOS
     }
+
+    public def getTotalAmount() {
+        BigDecimal totalAmount = new BigDecimal(0f)
+        if(items && !items.isEmpty()){
+            for ( item in items ) {
+                totalAmount = totalAmount.add(item.getPrice())
+            }
+        }
+        return totalAmount
+    }
+
+    public def getAmountArchived() {
+        BigDecimal totalAmount = new BigDecimal(0f)
+        if(contributions && !contributions.isEmpty()){
+            for ( contribution in contributions ) {
+                  totalAmount = totalAmount.add(contribution.amount)
+            }
+        }
+        return totalAmount
+    }
+
 }

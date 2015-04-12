@@ -1,8 +1,10 @@
 package com.melist
 
+import com.mercadopago.MP
 import com.ning.http.client.FluentStringsMap
 import com.ning.http.client.Response
 import grails.converters.JSON
+import org.codehaus.jettison.json.JSONObject
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -86,7 +88,9 @@ class WishListController {
     }
 
     def create() {
-        respond new WishList(params)
+        def wishList = new WishList(params)
+        wishList.user = session['loggedUser']
+        respond wishList
     }
 
     @Transactional
@@ -166,5 +170,19 @@ class WishListController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def contribution(WishList wishListInstance) {
+        respond wishListInstance
+    }
+
+    @Transactional
+    def createContribution(Contribution contribution){
+        MP mercadoPago = new MP(params.wishList?.user.accessToken)
+        mercadoPago.sandboxMode(true)
+        JSONObject preference = mercadoPago.createPreference("{'items':[{'title':'$params.wishList.name','quantity':1,'currency_id':'ARS','unit_price':10.5}]}");
+
+        String paymentURL = preference.getJSONObject("response").getString("sandbox_init_point")
+        redirect(url: paymentURL)
     }
 }

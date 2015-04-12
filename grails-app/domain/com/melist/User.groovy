@@ -2,15 +2,16 @@ package com.melist
 
 public class User {
 
-    long meliId
-    String token
+    String meliId
+    String accessToken
     String refreshToken
+    String nickname
 
     static hasMany = [lists: WishList]
 
     static constraints = {
         meliId blank: false, nullable: false
-        token blank: true, nullable: true
+        accessToken blank: true, nullable: true
         refreshToken blank: true, nullable: true
         lists blank: true, nullable: true
     }
