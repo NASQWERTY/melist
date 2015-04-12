@@ -21,13 +21,18 @@
         <ul>
             <g:each in="${items}" status="index" var="item">
                 <li>
-                    <g:img uri="${item.thumbnail}" ></g:img>
-                    ${item.title}
-                    <g:checkBox name="check-item-${item.id}" />
+                    <g:remoteLink controller="wishList" action="addItems" params="[itemId: item.meliId, items: items]" update="[success:'itemsAdded',failure:'error']">
+                        <g:img uri="${item.thumbnail}" ></g:img>
+                        ${item.title}
+                        %{--<g:checkBox name="check-item-${item.id}" />--}%
+                    </g:remoteLink>
                 </li>
             </g:each>
         </ul>
     </div>
+
+
+
 
     <div id="list-wishList" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -49,19 +54,9 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${wishListInstanceList}" status="i" var="wishListInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-						<td><g:link action="show" id="${wishListInstance.id}">${fieldValue(bean: wishListInstance, field: "startDate")}</g:link></td>
-					
-						<td><g:formatDate date="${wishListInstance.endDate}" /></td>
-					
-						<td>${fieldValue(bean: wishListInstance, field: "user")}</td>
-					
-						<td>${fieldValue(bean: wishListInstance, field: "wishListType")}</td>
-					
-					</tr>
-				</g:each>
+                    <div id="itemsAdded" class="ch-box panelItems">
+                        <g:render template="addItems"/>
+                    </div>
 				</tbody>
 			</table>
 			<div class="pagination">
